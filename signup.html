@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-[100%] bg-gray-200 pb-10">
+        <div class="bg-[#7749F8] text-white">
+          <div class="px-28 flex justify-between py-4">
+            <h4 class="font-bold ">Personal Bloging App</h4>
+            <div class="flex gap-10">
+              <p class="font-bold"><a href="/login.html">Log in</a></p>
+            </div>
+          </div>
+        </div>
+    <div class="w-[100%] flex justify-center items-center bg-gray-200 h-screen">
+        <div class="w-[35%] rounded border bg-white p-10 py-20">
+       
+            <div class="flex flex-col items-center gap-3 ">
+                <input id="sfname" type="text" placeholder="Frist name" class="w-[70%] py-3 px-2 border-2  h-8" style="border-radius: 7px;">
+
+                <input id="slname" type="text" placeholder="Last name" class="w-[70%] py-3 px-2 border-2  h-8" style="border-radius: 7px;">
+                <input id="semail" type="text" placeholder="Email " class="w-[70%] py-3 px-2 border-2  h-8" style="border-radius: 7px;">
+                <input id="spassword" type="text" placeholder="Password" class="w-[70%] py-3 px-2 border-2  h-8" style="border-radius: 7px;">
+                <input id="srpassword" type="text" placeholder="Repeat Password" class="w-[70%] py-3 px-2 border-2  h-8" style="border-radius: 7px;">
+                <button  id="signup" class="bg-[#7749F8] text-white py-1 px-5 rounded">
+                    Signup
+                  </button>
+            </div>
+     
+        </div>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBpLG3joZQl2z1Mcktul8HKZAl3ZbDeCNQ",
+  authDomain: "authintication-6ed41.firebaseapp.com",
+  projectId: "authintication-6ed41",
+  storageBucket: "authintication-6ed41.appspot.com",
+  messagingSenderId: "97805604495",
+  appId: "1:97805604495:web:96bbf81c0bd9c8f94a02fa"
+};
+  
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        let signUp =  document.getElementById("signup");
+        signUp.addEventListener('click', () => {
+          let email = document.getElementById("semail").value;
+          let password = document.getElementById("spassword").value;
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              console.log(user.email);
+              alert('Sign-Up Successfully');
+              location.href="/login.html";
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.log(errorCode, errorMessage);
+  
+            });
+        });
+      </script>
+
+
+</body>
+</html>
